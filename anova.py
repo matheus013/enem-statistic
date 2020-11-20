@@ -21,8 +21,8 @@ names = pd.read_excel(path + '/names.xlsx')
 df = df.sample(n=1000)
 df = df.dropna()
 
-df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_sexo', 'tp_cor_raca', 'tp_st_conclusao',
-                                                     'TP_ANO_CONCLUIU', 'sg_uf_esc', 'tp_dependencia_adm_esc', 'etnia',
+df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_cor_raca', 'tp_st_conclusao',
+                                                     'TP_ANO_CONCLUIU', 'tp_dependencia_adm_esc', 'etnia',
                                                      'grupo_etario', 'regiao_pais', 'faixa_renda',
                                                      'computador', 'escolaridade_pai', 'escolaridade_mae', 'rendimento',
                                                      'pr', 'pa', 'am', 'in', 'sm_1', 'sm_2', 'sm_2_5', 'sm_5_10',
