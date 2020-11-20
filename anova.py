@@ -19,6 +19,7 @@ df = pd.read_csv(path + '/100k.csv')
 names = pd.read_excel(path + '/names.xlsx')
 
 df = df.sample(n=1000)
+df = df.dropna()
 
 df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_sexo', 'tp_cor_raca', 'tp_st_conclusao',
                                                      'TP_ANO_CONCLUIU', 'sg_uf_esc', 'tp_dependencia_adm_esc', 'etnia',
