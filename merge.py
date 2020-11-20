@@ -14,26 +14,15 @@ path = 'data'
 data_input = []
 
 for i in range(2009, 2020):
-  print(path + '/{}.xlsx'.format(i), 'carregando.')
-  data_input.append(pd.read_excel(path + '/{}.xlsx'.format(i)))
+    print(path + '/{}.xlsx'.format(i), 'carregando.')
+    data_input.append(pd.read_excel(path + '/{}.xlsx'.format(i)))
 
 names = pd.read_excel(path + '/names.xlsx')
 
-def get_dict_from_year(year):
-  result = {}
-  for index, row in names.iterrows():
-    if row[year] == '':
-      continue
-    result[row[year]] = row['novo']
-  return result
-
-for i in range(11):
-  data_input[i].rename(columns=get_dict_from_year(2009 + i), inplace=True)
 print('renamed')
-data_input
 
 merged = pd.concat(data_input)
 
 print('merged')
 
-merged.to_csv(path + 'export_dataframe.csv', index = False, header=True)
+merged.to_csv(path + 'export_dataframe.csv', index=False, header=True)
