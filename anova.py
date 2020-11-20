@@ -27,6 +27,8 @@ df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_sexo', 'tp_
                                                      'pr', 'pa', 'am', 'in', 'sm_1', 'sm_2', 'sm_2_5', 'sm_5_10',
                                                      'fem', 'fed', 'est', 'mun', 'tem_comp', 'tem_internet'])
 
+print(df_melt)
+
 model = ols('value ~ C(media) + C(variable) + C(media):C(variable)', data=df_melt).fit()
 
 anova_table = sm.stats.anova_lm(model, typ=2)
