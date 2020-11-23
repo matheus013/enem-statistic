@@ -25,6 +25,7 @@ def get_filename(year):
 def get_dict_from_year(year):
     result = {}
     for index, row in names.iterrows():
+        print(row, year)
         if row[year] == '':
             continue
         result[row[year]] = row['novo']
