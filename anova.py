@@ -32,10 +32,10 @@ def get_dict_from_year(year):
     return result
 
 
-arg_year = sys.argv[1]
-arg_sample = sys.argv[2]
+arg_year = int(sys.argv[1])
+arg_sample = float(sys.argv[2])
 
-print('Ano de {}, com amostragem de {}%'.format(arg_year, float(arg_sample) * 100))
+print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
 
 df = pd.read_excel(get_filename(arg_year))
 df.rename(columns=get_dict_from_year(arg_year), inplace=True)
