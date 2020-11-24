@@ -34,6 +34,7 @@ def get_dict_from_year(year):
 
 class DataSet(dict):
     def __init__(self, local_path):
+        super().__init__()
         self.parquet = pq.ParquetFile(local_path)
 
     def __getitem__(self, key):
@@ -41,8 +42,6 @@ class DataSet(dict):
             return self.parquet.read([key]).to_pandas()[key]
         except:
             raise KeyError
-
-
 
 
 arg_year = int(sys.argv[1])
@@ -57,12 +56,10 @@ print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
 # df = df.dropna()
 #
 # df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_cor_raca', 'tp_st_conclusao',
-#                                                      'TP_ANO_CONCLUIU', 'tp_dependencia_adm_esc', 'etnia',
-#                                                      'grupo_etario', 'regiao_pais', 'faixa_renda',
-#                                                      'computador', 'escolaridade_pai', 'escolaridade_mae', 'rendimento',
-#                                                      'pr', 'pa', 'am', 'in', 'sm_1', 'sm_2', 'sm_2_5', 'sm_5_10',
-#                                                      'fem', 'fed', 'est', 'mun', 'tem_comp', 'tem_internet'])
-LargeData = DataSet('{}.parquet'.format(arg_year))
+# 'TP_ANO_CONCLUIU', 'tp_dependencia_adm_esc', 'etnia', 'grupo_etario', 'regiao_pais', 'faixa_renda', 'computador',
+# 'escolaridade_pai', 'escolaridade_mae', 'rendimento', 'pr', 'pa', 'am', 'in', 'sm_1', 'sm_2', 'sm_2_5', 'sm_5_10',
+# 'fem', 'fed', 'est', 'mun', 'tem_comp', 'tem_internet'])
+LargeData = DataSet(path + '/{}.parquet'.format(arg_year))
 model_str = 'value ~ C(media) + C(variable) + C(media):C(variable)'
 model = ols(model_str, data=LargeData).fit()
 

@@ -30,4 +30,4 @@ for i in range(2009, 2020):
 #
 # print('merged')
 
-merged.to_csv(path + 'export_dataframe.csv', index=False, header=True)
+# merged.to_csv(path + 'export_dataframe.csv', index=False, header=True)
