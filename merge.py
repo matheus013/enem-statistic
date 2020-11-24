@@ -9,9 +9,23 @@ Original file is located at
 
 import pandas as pd
 
-from anova import get_dict_from_year
-
 path = 'data'
+names = pd.read_excel(path + '/names.xlsx')
+
+
+def get_filename(year):
+    return path + '/{}.xlsx'.format(year)
+
+
+def get_dict_from_year(year):
+    result = {}
+    for index, row in names.iterrows():
+        print(row, year)
+        if row[year] == '':
+            continue
+        result[row[year]] = row['novo']
+    return result
+
 
 data_input = []
 
