@@ -40,7 +40,7 @@ print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
 df = pd.read_excel(get_filename(arg_year))
 df.rename(columns=get_dict_from_year(arg_year), inplace=True)
 
-df = df.sample(df.shape[0] * arg_sample)
+df = df.sample(int(df.shape[0] * arg_sample))
 df = df.dropna()
 
 df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_cor_raca', 'tp_st_conclusao',
