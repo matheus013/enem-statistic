@@ -9,20 +9,25 @@ Original file is located at
 
 import pandas as pd
 
+from anova import get_dict_from_year
+
 path = 'data'
 
 data_input = []
 
 for i in range(2009, 2020):
     print(path + '/{}.xlsx'.format(i), 'carregando.')
-    data_input.append(pd.read_excel(path + '/{}.xlsx'.format(i)))
+    df = pd.read_excel(path + '/{}.xlsx'.format(i))
+    df.rename(columns=get_dict_from_year(i), inplace=True)
+    df.to_parquet(path + '/{}.parquet'.format(i))
+    print(path + '/{}.parquet'.format(i), 'salvo com sucesso')
 
-names = pd.read_excel(path + '/names.xlsx')
-
-print('renamed')
-
-merged = pd.concat(data_input)
-
-print('merged')
+# names = pd.read_excel(path + '/names.xlsx')
+#
+# print('renamed')
+#
+# merged = pd.concat(data_input)
+#
+# print('merged')
 
 merged.to_csv(path + 'export_dataframe.csv', index=False, header=True)
