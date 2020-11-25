@@ -19,7 +19,9 @@ names = pd.read_excel(path + '/names.xlsx')
 
 
 def get_filename(year, format_file='xlsx'):
-    return path + '/{}.{}'.format(year, format_file)
+    result = path + '/{}.{}'.format(year, format_file)
+    print(result)
+    return result
 
 
 def get_dict_from_year(year):
@@ -45,7 +47,7 @@ class DataSet(dict):
 
 
 arg_year = int(sys.argv[1])
-arg_sample = float(sys.argv[2])
+arg_sample = 1
 
 print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
 #
