@@ -63,6 +63,7 @@ print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
 # 'fem', 'fed', 'est', 'mun', 'tem_comp', 'tem_internet'])
 
 LargeData = DataSet(get_filename(arg_year, 'parquet'))
+print(LargeData)
 
 # model_str = 'media ~ C(media) + C(variable) + C(media):C(variable)'
 model_str = "media ~ nu_idade + tp_cor_raca + tp_st_conclusao + TP_ANO_CONCLUIU + tp_dependencia_adm_esc + etnia + " \
