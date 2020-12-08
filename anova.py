@@ -17,6 +17,11 @@ path = 'data'
 
 names = pd.read_excel(path + '/names.xlsx')
 
+columns_test = ['tp_sexo', 'tp_cor_raca', 'tp_dependencia_adm_esc', 'nu_nota_cn',
+                'nu_nota_ch', 'nu_nota_lc', 'nu_nota_mt', 'TP_LINGUA',
+                'tp_status_redacao', 'nu_nota_redacao', 'regiao_pais', 'computador',
+                'escolaridade_pai', 'escolaridade_mae', 'rendimento', 'internet', 'media']
+
 
 def get_filename(year, format_file='xlsx'):
     result = path + '/{}.{}'.format(year, format_file)
@@ -49,18 +54,22 @@ class DataSet(dict):
 arg_year = int(sys.argv[1])
 arg_sample = 1
 
-print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
-#
+# print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
+print('Loading...')
 df = pd.read_excel(get_filename(arg_year))
 df.rename(columns=get_dict_from_year(arg_year), inplace=True)
 
-LargeData = DataSet(get_filename(arg_year, 'parquet'))
+df = df[columns_test]
+
+df = df.dropna()
+
+# LargeData = DataSet(get_filename(arg_year, 'parquet'))
 # print(LargeData)
 
 # model_str = 'media ~ C(media) + C(variable) + C(media):C(variable)'
 model_str = 'media ~ tp_cor_raca + internet + escolaridade_mae + tp_sexo + ' \
             'rendimento + regiao_pais + tp_dependencia_adm_esc'
-
+print('Process...')
 model = ols(model_str, data=df).fit()
 
 anova_table = sm.stats.anova_lm(model, typ=2)
