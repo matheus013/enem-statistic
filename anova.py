@@ -66,9 +66,9 @@ LargeData = DataSet(get_filename(arg_year, 'parquet'))
 print(LargeData)
 
 # model_str = 'media ~ C(media) + C(variable) + C(media):C(variable)'
-model_str = "media ~ nu_idade + tp_cor_raca + tp_st_conclusao + TP_ANO_CONCLUIU + tp_dependencia_adm_esc + etnia + " \
-            "grupo_etario + regiao_pais + faixa_renda + computador + escolaridade_pai + escolaridade_mae + rendimento " \
-            "+ pr + pa + am + in + sm_1 + sm_2 + sm_2_5 + sm_5_10 + fem + fed + est + mun + tem_comp + tem_internet "
+model_str = 'media ~ tp_cor_raca + internet + escolaridade_mae + tp_sexo + ' \
+            'rendimento + regiao_pais + tp_dependencia_adm_esc'
+
 model = ols(model_str, data=LargeData).fit()
 
 anova_table = sm.stats.anova_lm(model, typ=2)
