@@ -51,25 +51,17 @@ arg_sample = 1
 
 print('Ano de {}, com amostragem de {}%'.format(arg_year, arg_sample * 100))
 #
-# df = pd.read_excel(get_filename(arg_year))
-# df.rename(columns=get_dict_from_year(arg_year), inplace=True)
-#
-# df = df.sample(int(df.shape[0] * arg_sample))
-# df = df.dropna()
-#
-# df_melt = pd.melt(df, id_vars=['media'], value_vars=['nu_idade', 'tp_cor_raca', 'tp_st_conclusao',
-# 'TP_ANO_CONCLUIU', 'tp_dependencia_adm_esc', 'etnia', 'grupo_etario', 'regiao_pais', 'faixa_renda', 'computador',
-# 'escolaridade_pai', 'escolaridade_mae', 'rendimento', 'pr', 'pa', 'am', 'in', 'sm_1', 'sm_2', 'sm_2_5', 'sm_5_10',
-# 'fem', 'fed', 'est', 'mun', 'tem_comp', 'tem_internet'])
+df = pd.read_excel(get_filename(arg_year))
+df.rename(columns=get_dict_from_year(arg_year), inplace=True)
 
 LargeData = DataSet(get_filename(arg_year, 'parquet'))
-print(LargeData)
+# print(LargeData)
 
 # model_str = 'media ~ C(media) + C(variable) + C(media):C(variable)'
 model_str = 'media ~ tp_cor_raca + internet + escolaridade_mae + tp_sexo + ' \
             'rendimento + regiao_pais + tp_dependencia_adm_esc'
 
-model = ols(model_str, data=LargeData).fit()
+model = ols(model_str, data=df).fit()
 
 anova_table = sm.stats.anova_lm(model, typ=2)
 
